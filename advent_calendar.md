@@ -15,12 +15,13 @@ want to understand what those tests are about? Read on!
 
 For many reasons, the anomaly detector model state is snapshotted
 periodically.
-You can [view this these model snapshots](https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html):
+You can view this these model snapshots by [retrieving the snapshot ID](https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html):
 
 ![GET Model Snapshots](images/get_model_snapshots.png "GET Model Snapshots")
 
-... but unless you can easily decode the base64 encoded, compressed model
-state you probably won't learn very much from looking at it.
+... then searching in the `.ml-state` index in Elasticsearch. However, unless
+you can easily decode the base64 encoded, compressed model state you probably
+won't learn very much from looking at it.
 
 ![compressed model state](images/compressed_model_state.png "Compressed model state")
 
@@ -31,13 +32,13 @@ directory
 
 ![model_extractor_directory](images/model_extractor_directory.png "model_extractor directory")
 
-One of `model_extractor`'s goals is to fill the gap between the
+One of goals of the `model_extractor` is to fill the gap between the
 aforementioned unit tests and the extensive integration tests in
-`elasticsearch` and not forgetting the quite frankly heroic efforts of
-the Machine Learning QA team (seriously, these guys are the unsung
+Elasticsearch. Not forgetting the quite frankly heroic efforts of
+the Machine Learning QA team (seriously, these folks are the unsung
 heroes, slaving away behind the scenes, who make each
 [release](https://www.elastic.co/blog/elasticsearch-7-5-0-released) what
-it is.)
+it is).
 
 The design and implementation of `model_extractor` is simple. Using the
 existing `ml-cpp` APIs it decodes the compressed model state generated
