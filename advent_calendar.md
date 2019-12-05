@@ -13,13 +13,13 @@ viewer](https://www.elastic.co/guide/en/kibana/current/xpack-ml-anomalies.html)
 and ran the extensive tests. If you have, kudos to you! But do you
 want to understand what those tests are about? Read on!
 
-For many reasons, the anomaly detector mode state is [snapshotted
-periodically](https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-snapshot-resource.html).
-You can even view this these model snapshots in `elasticsearch`
+For many reasons, the anomaly detector model state is snapshotted
+periodically.
+You can [view this these model snapshots](https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html):
 
 ![GET Model Snapshots](images/get_model_snapshots.png "GET Model Snapshots")
 
-but unless you can easily decode the base64 encoded, compressed model
+... but unless you can easily decode the base64 encoded, compressed model
 state you probably won't learn very much from looking at it.
 
 ![compressed model state](images/compressed_model_state.png "Compressed model state")
