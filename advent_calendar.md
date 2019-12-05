@@ -4,16 +4,14 @@ why not?!) Sure you may think you know what's going on, you've read our
 extensive and beautifully written
 [documentation](https://www.elastic.co/guide/en/elastic-stack-overview/current/xpack-ml.html),
 maybe you've even enabled
-[model plot](https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-job-resource.html#ml-apimodelplotconfig)
+model plot
 in the job configuration and [viewed the results in the single metric
 viewer](https://www.elastic.co/guide/en/kibana/current/xpack-ml-anomalies.html)
 (but would you like to know more?). Maybe you've downloaded the backend
 [source code](https://github.com/elastic/ml-cpp),
 [compiled it](https://github.com/elastic/ml-cpp/blob/master/CONTRIBUTING.md),
-and ran the extensive tests (and if you have kudos to you!) but do you
-want to understand more what those tests are about? If any of this
-sounds like you, or you're just mildly curious, or simply bored and have
-15 minutes or so to spare, please read on.
+and ran the extensive tests. If you have, kudos to you! But do you
+want to understand what those tests are about? Read on!
 
 For many reasons, the anomaly detector mode state is [snapshotted
 periodically](https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-snapshot-resource.html).
