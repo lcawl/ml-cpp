@@ -212,7 +212,7 @@ you would probably have a method that looked something like this
         print(subprocess.run(['ls', '-lrt'], stdout=subprocess.PIPE).stdout.decode('utf-8'))
 ```
 
-but those details aren't that important right now.
+... but those details aren't that important right now.
 
 What is important is the output from `model_extractor`. We told it to
 write the decoded model state data to an `XML` file called `normal.xml`.
@@ -249,14 +249,14 @@ Pretty neat eh? No? Maybe seeing some plots of the anomaly detection
 results and the evolution of model parameters over time will convince
 you?
 
-Here's the results, with model bounds overlaid and anomalies represented
+Here are the results, with model bounds overlaid and anomalies represented
 by the same colours as they are in the single metric viewer in Kibana.
 As a reminder, here's the colour key.
 
 ![kibana_anomaly_colours](images/kibana_anomaly_colours.png "Kibana anomaly colour key.")
 
 Time (represented as seconds since
-epoch - Jan 1, 1970) is along the x-axis, while data count is along the
+epoch (Jan 1, 1970)) is along the x-axis, while data count is along the
 y-axis.
 
 ![normal_results_with_model_bounds_and_anomalies](images/normal_results_with_model_bounds_and_anomalies.png "Results with model bounds and anomalies.")
@@ -265,12 +265,12 @@ Here's the evolution of model parameters over time.
 
 ![normal_params](images/normal_params.png "Normal parameters.")
 
-Here's those same parameters again but this time we'll show the
+Here are those same parameters again but this time we'll show the
 evolution of the resulting normal distribution.
 
 ![normal_params_3d](images/normal_params_3d.png "Normal distribution evolution.")
 
-and here's the evolution of the prior weights of all the candidate models.
+And here's the evolution of the prior weights of all the candidate models.
 
 ![evolution_prior_weights](images/evolution_prior_weights.png "Evolution of prior weights.")
 
@@ -278,7 +278,7 @@ I could go on (I do get carried away by this stuff) but feel I should
 leave it there.
 
 Oh ok, you convinced me. Just one more screenshot. Here's a top hat with
-baubles on (otherwise known as a transient bi-modal normal distribution)
+baubles on (otherwise known as a transient bi-modal normal distribution):
 
 ![top_hat](images/top_hat.png "transient bi-modal normal distribution with anomalies.")
 
