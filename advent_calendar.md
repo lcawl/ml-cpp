@@ -41,33 +41,33 @@ heroes, slaving away behind the scenes, who make each
 it is).
 
 The design and implementation of `model_extractor` is simple. Using the
-existing `ml-cpp` APIs it decodes the compressed model state generated
+existing `ml-cpp` APIs, it decodes the compressed model state that was generated
 by the primary anomaly detector executable `autodetect`. Once this is
-done the model state can be dumped to a file in human readable format
+done, the model state can be dumped to a file in human readable format
 (either `XML` or `JSON`) and easily parsed by any number of scripting
 languages such as `perl` or `python`. It can even do this at regular
-periodic intervals. We'll see how to do exactly that soon.
+periodic intervals. We'll see exactly how to do that soon.
 
-If you were really keen you could even parse the model state and display
-the evolution of model parameters over time. Which incidentally, is
+If you were really keen, you could even parse the model state and display
+the evolution of model parameters over time. Which, incidentally, is
 exactly what I've done and am keen to share some of the more interesting
 aspects of that exercise with you now.
 
 Perhaps the simplest example of an anomaly detection job is called
 `simple count`. This detector... well I guess the clue is in the name,
 right? As a first foray in to what `model_extractor` can show us about
-the evolution of model parameters let's set up an anomaly detection job
-on the command line and pass in a similarly simple data set contained in a `CSV`
-file consisting of two columns: the first is a time stamp and the second
+the evolution of model parameters, let's set up an anomaly detection job
+on the command line. We'll pass in a similarly simple data with two columns in a CSV
+file. The first column is a time stamp and the second column
 is an integer representing a count of something (I'll leave it up to you
 to think of what the count might represent, but do be creative. It is
 the festive season after all!). I said the data set would be simple so
 let's make those counts conform to a normal distribution (what is "normal"
-anyway? who's the judge? At Elastic we say ["you do you and
-that's ok"](https://www.elastic.co/blog/diversity-and-inclusion-at-elasticon-2018).)
+anyway? Who's the judge? At Elastic we say ["you do you and
+that's ok"](https://www.elastic.co/blog/diversity-and-inclusion-at-elasticon-2018).
 
-These are the first 10 lines of a `CSV` file containing a normally
-distributed timeseries of counts I created earlier, note the existence
+These are the first 10 lines of a CSV file containing a normally
+distributed timeseries of counts. Note the existence
 and values of the column headings:
 
 ```bash
@@ -83,8 +83,8 @@ time,count
 1484006880,979
 ```
 
-This `CSV` file was generated using `python` but you can easily do
-something similar using your preferred coding language, you are not
+This CSV file was generated using `python` but you can easily do
+something similar using your preferred coding language. You are not
 restricted to use [Elastic's source code](https://www.elastic.co/about/our-source-code)
 
 ```python
@@ -116,31 +116,30 @@ As you can see, this code snippet generates a normal distribution with
 those numbers, they will come in handy later.
 
 Using this approach, you could generate many different kinds of
-synthetic datasets that exercise different aspects of `autodetect`'s
-modelling. For example, you could potentially generate datasets that
+synthetic data sets that exercise different aspects of `autodetect`'s
+modelling. For example, you could potentially generate data sets that
 conformed to one of the `log-normal`, `gamma` or `poisson`
 distributions, or any combination of these. The possibilities are
-endless! (ok, maybe not endless, statistics never was my strong point!)
+endless (ok, maybe not endless, statistics never was my strong point!)
 but let's keep things simple for now.
 
 Speaking of simple. Let's simply dive right in and look at how to run
 `autodetect` in a "pipeline" with `model_extractor` in order to extract
-model state after every bucket has been processed. Here's what the
-command line for running that anomaly detection job from the command
+model state after every bucket has been processed. Here's what running that anomaly detection job from the command
 line might look like:
 
 ```
 autodetect --jobid=test --bucketspan=60 --summarycountfield=count --timefield=time --delimiter=, --modelplotconfig=modelplotconfig.conf --fieldconfig=fieldconfig.conf --persist=normal.pipe --persistIsPipe --bucketPersistInterval=1 --persistInForeground --input=normal.csv --output=normal.out
 ```
 
-where the contents of `modelplotconfig.conf` is
+where the contents of `modelplotconfig.conf` are:
 
 ```bash
 boundspercentile = 95.0
 terms =
 ```
 
-and `fieldconfig.conf` contains
+and `fieldconfig.conf` contains:
 
 ```bash
 detector.0.clause = count
@@ -152,8 +151,7 @@ file at the root of the `ml-cpp` repository. Incidentally, the
 `modelplotconfig.conf` configuration is the same as that used when you
 select the `generate model plot` option when creating a job in our super
 easy-to-use
-[anomaly detector job wizard in Kibana](https://www.elastic.co/guide/en/elastic-stack-overview/7.5/create-jobs.html)
-and this helps explain the mystery of what the model plot bounds
+[anomaly detector job wizard in Kibana](https://www.elastic.co/guide/en/elastic-stack-overview/7.5/create-jobs.html). This also helps explain the mystery of what the model plot bounds
 actually represent - they indicate that we're 95% confident that a point
 in "the shaded area" in the single metric plot is _not_ an anomaly.
 Finally, I think the `fieldconfig.conf` configuration speaks for itself.
@@ -164,7 +162,7 @@ And here is the corresponding command line for the `model_extractor`:
 model_extractor --input=normal_named_pipe --inputIsPipe --output=normal.xml --outputFormat=XML
 ```
 
-again some explanation might help you understand what's going on
+Again, some explanation of the parameters might help you understand what's going on:
 
 ```bash
 ./model_extractor --help
